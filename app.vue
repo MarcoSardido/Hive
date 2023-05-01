@@ -1,5 +1,5 @@
 <template>
-  <div>
-    <h1>Hive</h1>
-  </div>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
