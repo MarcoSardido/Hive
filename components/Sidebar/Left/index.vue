@@ -3,7 +3,7 @@ const { defaultTransition } = useTailwindConfig()
 </script>
 <template>
     <div class="h-screen flex flex-col">
-        <div class="py-2 px-3 my-2 rounded-full hover:bg-yellow-50/70 w-min dark:hover:bg-white/20"
+        <div class="py-2 px-3 my-2 rounded-full hover:bg-yellow-50/70 w-full dark:hover:bg-dim-50"
             :class="defaultTransition">
             <NuxtLink to="/">
                 <div class="flex items-center">
