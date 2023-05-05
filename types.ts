@@ -3,10 +3,11 @@
  */
 
 type UserType = {
+    id?: string
     name: string
     username: string
     email: string
-    password: string
+    password?: string
     repeatPassword?: string
     userImage: string
 }
