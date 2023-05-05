@@ -7,7 +7,7 @@ const { defaultTransition } = useTailwindConfig()
             :class="defaultTransition">
             <NuxtLink to="/">
                 <div class="flex items-center">
-                    <div class="w-10 h-10 md:w-14 md:h-14 mr-2 dark:text-dim-500">
+                    <div class="w-10 h-10 md:w-10 md:h-10 mr-2 dark:text-dim-500">
                         <img src="/Brand.png" alt="Hive Logo">
                     </div>
                     <span class="hidden xl:block text-[25px] font-semibold dark:text-white">Hive</span>
@@ -15,7 +15,7 @@ const { defaultTransition } = useTailwindConfig()
             </NuxtLink>
         </div>
         <div class="space-y-2">
-            <SidebarLeftTab active>
+            <SidebarLeftTab active path="/">
                 <template v-slot:icon>
                     <!-- <IconHomeOutline />  -->
                     <IconHome />
@@ -24,8 +24,7 @@ const { defaultTransition } = useTailwindConfig()
                     Home
                 </template>
             </SidebarLeftTab>
-
-            <SidebarLeftTab>
+            <SidebarLeftTab path="/explore">
                 <template v-slot:icon>
                     <!-- <IconHash /> -->
                     <IconHashOutline />
@@ -34,7 +33,6 @@ const { defaultTransition } = useTailwindConfig()
                     Explore
                 </template>
             </SidebarLeftTab>
-
             <SidebarLeftTab>
                 <template v-slot:icon>
                     <!-- <IconMessage /> -->
@@ -44,7 +42,6 @@ const { defaultTransition } = useTailwindConfig()
                     Messages
                 </template>
             </SidebarLeftTab>
-
             <SidebarLeftTab>
                 <template v-slot:icon>
                     <!-- <IconBell /> -->
@@ -54,8 +51,7 @@ const { defaultTransition } = useTailwindConfig()
                     Notifications
                 </template>
             </SidebarLeftTab>
-
-            <SidebarLeftTab>
+            <SidebarLeftTab path="/profile/marco">
                 <template v-slot:icon>
                     <!-- <IconPerson /> -->
                     <IconPersonOutline />
@@ -64,7 +60,6 @@ const { defaultTransition } = useTailwindConfig()
                     Profile
                 </template>
             </SidebarLeftTab>
-
             <SidebarLeftTab>
                 <template v-slot:icon>
                     <!-- <IconDots /> -->
@@ -77,4 +72,3 @@ const { defaultTransition } = useTailwindConfig()
         </div>
     </div>
 </template>
-<style lang="scss" scoped></style>
