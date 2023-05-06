@@ -1,7 +1,7 @@
 <script setup lang="ts">
-definePageMeta({
-    middleware: 'auth'
-})
+const { initAuth } = useAuth()
+
+// onBeforeMount(() => initAuth())
 
 const loading = ref(false)
 </script>

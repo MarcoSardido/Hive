@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import { createRefreshToken } from '~/server/db/refreshToken';
 import { getUserByEmail } from "~/server/db/users";
 import { userTransformer } from '~/server/transformers/user';
-import { generateTokens } from '~/server/utils/jwt';
+import { generateTokens, sendRefreshToken } from '~/server/utils/jwt';
 
 export default defineEventHandler(async event => {
     const resBody = await readBody(event);
@@ -37,10 +37,7 @@ export default defineEventHandler(async event => {
     })
 
     // Add it in http only cookie
-    setCookie(event, 'refresh_token', refreshToken, {
-        httpOnly: true,
-        sameSite: true
-    })
+    sendRefreshToken(event, refreshToken)
 
     return {
         user: userTransformer(foundUser),

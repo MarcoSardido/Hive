@@ -4,9 +4,9 @@ definePageMeta({
 })
 const { signIn } = useAuth()
 
-const loading = ref(false);
+const isLoading = ref(false);
 const handleSignIn = async formData => {
-    loading.value = true
+    isLoading.value = true
     try {
         const user = await signIn({ email: formData.email, password: formData.password })
 
@@ -24,7 +24,7 @@ const handleSignIn = async formData => {
 </script>
 <template>
     <div class="h-full flex items-center justify-center">
-        <div v-if="loading" class=" absolute h-screen w-full flex items-center justify-center z-50 opacity-60 bg-black">
+        <div v-if="isLoading" class=" absolute h-screen w-full flex items-center justify-center z-50 opacity-60 bg-black">
             <Loader />
         </div>
 

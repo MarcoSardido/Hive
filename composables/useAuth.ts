@@ -39,12 +39,43 @@ export default () => {
         }
     }
 
-    const initAuth = () => {
+    const refreshToken = async () => {
+        try {
+            const response: signInResponseType = await $fetch('/api/auth/refresh')
+            setToken(response.accessToken)
 
+            return true
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    const getUser = async () => {
+        try {
+            const response: signInResponseType = await useFetchApi('/api/auth/user')
+            setUser(response.user)
+
+            return true
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    const initAuth = async () => {
+        try {
+            await refreshToken();
+            await getUser()
+            return true
+        } catch (error) {
+            throw error;
+        }
     }
 
     return {
         signIn,
-        useAuthUser
+        useAuthUser,
+        useAuthToken,
+        initAuth
+        
     }
 }
