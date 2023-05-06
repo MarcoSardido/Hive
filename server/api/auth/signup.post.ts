@@ -2,7 +2,7 @@ import { createUser } from '~/server/db/users';
 import { userTransformer } from '~/server/transformers/user';
 import { UserType } from '~/types'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async event => {
     const resBody = await readBody(event);
     const { username, email, password, repeatPassword, name } = resBody
 

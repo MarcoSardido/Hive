@@ -12,3 +12,11 @@ export const createUser = (userData: UserType) => {
         data: securedUserData
     })
 }
+
+export const getUserByEmail = (email: any) => {
+    return prisma.user.findUnique({
+        where: {
+            email
+        }
+    })
+}

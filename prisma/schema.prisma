@@ -11,13 +11,28 @@ datasource db {
 }
 
 model User {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  email String
-  name String
-  username String @unique
-  password String
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  email     String @unique
+  name      String
+  username  String 
+  password  String
   userImage String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  refreshToken RefreshToken[]
+}
+
+model RefreshToken {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  token String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String @db.ObjectId
+
+  // Relationship User - RefreshToken 
+  user User @relation(fields: [userId], references: [id])
 }

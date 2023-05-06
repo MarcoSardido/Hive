@@ -11,7 +11,6 @@
 </template>
 <style scoped>
 @-webkit-keyframes honeycomb {
-
     0%,
     20%,
     80%,
@@ -30,7 +29,6 @@
 }
 
 @keyframes honeycomb {
-
     0%,
     20%,
     80%,

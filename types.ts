@@ -2,7 +2,7 @@
  * Prisma Add User
  */
 
-type UserType = {
+interface UserType {
     id?: string
     name: string
     username: string
