@@ -24,24 +24,23 @@ export default () => {
         authUser.value = newUser
     }
 
-    const signIn = ({ email, password }: signInType) => {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const response: signInResponseType = await $fetch('/api/auth/signin', {
-                    method: 'POST',
-                    body: {
-                        email,
-                        password
-                    }
-                })
-                setToken(response.accessToken)
-                setUser(response.user)
+    const signIn = async ({ email, password }: signInType) => {
+        try {
+            const response: signInResponseType = await $fetch('/api/auth/signin', {
+                method: 'POST',
+                body: { email, password }
+            })
+            setToken(response.accessToken)
+            setUser(response.user)
 
-                resolve(true)
-            } catch (error) {
-                reject(error)
-            }
-        })
+            return true
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    const initAuth = () => {
+
     }
 
     return {

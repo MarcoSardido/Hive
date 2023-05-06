@@ -2,11 +2,33 @@
 definePageMeta({
     layout: 'auth'
 })
+const { signIn } = useAuth()
+
+const loading = ref(false);
+const handleSignIn = async formData => {
+    loading.value = true
+    try {
+        const user = await signIn({ email: formData.email, password: formData.password })
+
+        watchEffect(() => {
+            // to show loader effects
+            setTimeout(() => {
+                if (user) return navigateTo('/')
+            }, 3000)
+        })
+    } catch (error) {
+        console.error(`Error @handleSignIn: ${error}`)
+    }
+}
+
 </script>
 <template>
     <div class="h-full flex items-center justify-center">
-        <AuthSignIn />
+        <div v-if="loading" class=" absolute h-screen w-full flex items-center justify-center z-50 opacity-60 bg-black">
+            <Loader />
+        </div>
+
+        <AuthSignIn :handleSignIn="handleSignIn" />
     </div>
 </template>
-<style lang="scss" scoped>
-</style>
+<style scoped></style>

@@ -1,22 +1,18 @@
 <script setup>
-const { signin } = useAuth()
+defineProps({
+    handleSignIn: {
+        type: Function,
+        required: true
+    }
+})
 
 const data = reactive({
     email: '',
     password: ''
 })
-
-const handleSignIn = async () => {
-    try {
-        const res = await signin({ email: data.email, password: data.password })
-        console.log(res)
-    } catch (error) {
-        console.error(`Error @handleSignIn: ${error}`)
-    }
-}
 </script>
 <template>
-    <form @submit.prevent="handleSignIn" class="form_container">
+    <form @submit.prevent="handleSignIn(data)" class="form_container">
         <div class="logo_container">
             <img src="/Brand.png" alt="Hive Logo">
         </div>
