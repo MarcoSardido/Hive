@@ -2,6 +2,7 @@
 useHead({
     title: 'Hive'
 })
+
 const darkMode = ref(false)
 </script>
 <template>

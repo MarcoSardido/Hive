@@ -1,12 +1,15 @@
-<script setup lang="ts">
-const { initAuth } = useAuth()
+<script setup>
+// definePageMeta({
+//     middleware: 'auth'
+// })
 
-// onBeforeMount(() => initAuth())
+const { useAuthUser } = useAuth()
+const user = useAuthUser()
 
 const loading = ref(false)
 </script>
 <template>
     <Main title="Home" :loading="loading">
-        Hello
+        Hello {{ user }}
     </Main>
 </template>

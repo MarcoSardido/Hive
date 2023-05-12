@@ -2,24 +2,21 @@
 definePageMeta({
     layout: 'auth'
 })
+
 const { signIn } = useAuth()
 
 const isLoading = ref(false);
-const handleSignIn = async formData => {
+const handleSignIn = (formData) => {
     isLoading.value = true
     try {
-        const user = await signIn({ email: formData.email, password: formData.password })
-
-        watchEffect(() => {
-            // to show loader effects
-            setTimeout(() => {
-                if (user) return navigateTo('/')
-            }, 3000)
-        })
+        setTimeout(async () => {
+            await signIn({ email: formData.email, password: formData.password })
+        }, 3000);
     } catch (error) {
         console.error(`Error @handleSignIn: ${error}`)
     }
 }
+
 
 </script>
 <template>

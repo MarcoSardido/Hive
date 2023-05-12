@@ -1,13 +1,12 @@
 import { getRefreshTokenByToken } from '~/server/db/refreshToken'
 import { decodeRefreshToken, generateTokens } from '~/server/utils/jwt'
 import { getUserById } from '~/server/db/users'
-import { UserType } from '~/types'
 
 export default defineEventHandler(async event => {
     const refresh_token = getCookie(event, 'refresh_token')
 
     if (!refresh_token) {
-        return sendError(event, createError({ statusCode: 401, statusMessage: 'Refresh token is invalid' }))
+        return sendError(event, createError({ statusCode: 401, statusMessage: 'Refresh token not found' }))
     }
 
     const dbRefreshToken = await getRefreshTokenByToken(refresh_token)

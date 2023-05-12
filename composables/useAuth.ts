@@ -13,6 +13,7 @@ interface signInResponseType {
 export default () => {
     const useAuthToken = () => useState('auth_token')
     const useAuthUser = () => useState('auth_user')
+    const useAuthLoading = () => useState('auth_loading', () => true)
 
     const setToken = (newToken: string) => {
         const authToken = useAuthToken()
@@ -24,58 +25,75 @@ export default () => {
         authUser.value = newUser
     }
 
-    const signIn = async ({ email, password }: signInType) => {
-        try {
-            const response: signInResponseType = await $fetch('/api/auth/signin', {
-                method: 'POST',
-                body: { email, password }
-            })
-            setToken(response.accessToken)
-            setUser(response.user)
+    const setIsAuthLoading = (value: boolean) => {
+        const authLoading = useAuthLoading()
+        authLoading.value = value
+    }
 
-            return true
-        } catch (error) {
-            throw error;
-        }
+    const signIn = ({ email, password }: signInType) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response: signInResponseType = await $fetch('/api/auth/signin', {
+                    method: 'POST',
+                    body: { email, password }
+                })
+                setToken(response.accessToken)
+                setUser(response.user)
+
+                navigateTo('/')
+            } catch (error) {
+                reject(error)
+            }
+        })
     }
 
     const refreshToken = async () => {
-        try {
-            const response: signInResponseType = await $fetch('/api/auth/refresh')
-            setToken(response.accessToken)
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response: signInResponseType = await $fetch('/api/auth/refresh')
+                setToken(response.accessToken)
 
-            return true
-        } catch (error) {
-            throw error;
-        }
+                resolve(true)
+            } catch (error) {
+                reject(error)
+            }
+        })
     }
 
     const getUser = async () => {
-        try {
-            const response: signInResponseType = await useFetchApi('/api/auth/user')
-            setUser(response.user)
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response: signInResponseType = await useFetchApi('/api/auth/user')
+                setUser(response)
 
-            return true
-        } catch (error) {
-            throw error;
-        }
+                resolve(true)
+            } catch (error) {
+                reject(error)
+            }
+        })
     }
 
     const initAuth = async () => {
-        try {
-            await refreshToken();
-            await getUser()
-            return true
-        } catch (error) {
-            throw error;
-        }
+        return new Promise(async (resolve, reject) => {
+            setIsAuthLoading(true)
+            try {
+                await refreshToken();
+                await getUser()
+
+                resolve(true)
+            } catch (error) {
+                reject(error)
+            } finally {
+                setIsAuthLoading(false)
+            }
+        })
     }
 
     return {
         signIn,
         useAuthUser,
         useAuthToken,
-        initAuth
-        
+        initAuth,
+        useAuthLoading
     }
 }
