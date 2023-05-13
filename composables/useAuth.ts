@@ -1,3 +1,4 @@
+import jwt_decode from "jwt-decode"
 import { UserType } from "~/types"
 
 interface signInType {
@@ -8,6 +9,12 @@ interface signInType {
 interface signInResponseType {
     accessToken: string
     user: UserType
+}
+
+interface jwtDecodeType {
+    exp: number
+    iat: number
+    userId: string
 }
 
 export default () => {
@@ -73,12 +80,27 @@ export default () => {
         })
     }
 
+    const reRefreshAccessToken = () => {
+        const authToken = useAuthToken()
+        if (!authToken.value) return
+
+        const jwt: jwtDecodeType = jwt_decode(authToken.value)
+        const newRefreshTime = jwt.exp - 60000
+
+        setTimeout(async () => {
+            await refreshToken()
+            reRefreshAccessToken()
+        }, newRefreshTime)
+    }
+
     const initAuth = async () => {
         return new Promise(async (resolve, reject) => {
             setIsAuthLoading(true)
             try {
                 await refreshToken();
                 await getUser()
+
+                reRefreshAccessToken()
 
                 resolve(true)
             } catch (error) {
