@@ -14,14 +14,18 @@ model User {
   id        String @id @default(auto()) @map("_id") @db.ObjectId
   email     String @unique
   name      String
-  username  String 
+  username  String
   password  String
   userImage String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // Refresh Token
   refreshToken RefreshToken[]
+
+  // Buzz
+  BuzzPost BuzzPost[]
 }
 
 model RefreshToken {
@@ -35,4 +39,25 @@ model RefreshToken {
 
   // Relationship User - RefreshToken 
   user User @relation(fields: [userId], references: [id])
+}
+
+model BuzzPost {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  text String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Author
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String @db.ObjectId
+
+  // Reply to another buzz post
+  replyToId String?    @db.ObjectId
+  replyTo   BuzzPost?  @relation("replies", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  // Same way other buzz post can reply to this buzz post
+  replies   BuzzPost[] @relation("replies")
+
+  // Todo: Media post
 }
