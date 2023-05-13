@@ -1,15 +1,16 @@
 <script setup>
-// definePageMeta({
-//     middleware: 'auth'
-// })
-
-const { useAuthUser } = useAuth()
+const { useAuthUser, useAuthLoading } = useAuth()
 const user = useAuthUser()
+const isLoading = useAuthLoading()
 
-const loading = ref(false)
 </script>
 <template>
-    <Main title="Home" :loading="loading">
-        Hello {{ user }}
+    <Main title="Home" :loading="isLoading">
+        <!-- Hello {{ user }} -->
+        <Buzz :user="user" />
+
+        <div>
+            Some Buzz post
+        </div>
     </Main>
 </template>

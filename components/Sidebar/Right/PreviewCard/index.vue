@@ -13,7 +13,7 @@ const { defaultBorderColor, defaultTransition } = useTailwindConfig()
 
         <slot></slot>
 
-        <div class="p-3 text-sm text-dim-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-dim-50" :class="defaultTransition">
+        <div class="p-3 text-sm text-pallette-500 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-100/10" :class="defaultTransition">
             Show more
         </div>
     </div>

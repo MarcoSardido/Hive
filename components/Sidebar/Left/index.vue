@@ -3,11 +3,11 @@ const { defaultTransition } = useTailwindConfig()
 </script>
 <template>
     <div class="h-screen flex flex-col">
-        <div class="py-2 px-3 my-2 rounded-full hover:bg-yellow-50/70 w-full dark:hover:bg-dim-50"
+        <div class="py-2 px-3 my-2 rounded-full hover:bg-yellow-50/70 w-full dark:hover:bg-pallette-25"
             :class="defaultTransition">
             <NuxtLink to="/">
                 <div class="flex items-center">
-                    <div class="w-10 h-10 md:w-10 md:h-10 mr-2 dark:text-dim-500">
+                    <div class="w-10 h-10 md:w-10 md:h-10 mr-2 dark:text-pallette-500">
                         <img src="/Brand.png" alt="Hive Logo">
                     </div>
                     <span class="hidden xl:block text-[25px] font-semibold dark:text-white">Hive</span>
@@ -69,6 +69,12 @@ const { defaultTransition } = useTailwindConfig()
                     More
                 </template>
             </SidebarLeftTab>
+
+            <div>
+                <UIBuzzButton liquid size="lg">
+                    <span class="font-bold">Buzz</span>
+                </UIBuzzButton>
+            </div>
         </div>
     </div>
 </template>

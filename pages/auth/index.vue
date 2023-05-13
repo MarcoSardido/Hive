@@ -22,7 +22,7 @@ const handleSignIn = (formData) => {
 <template>
     <div class="h-full flex items-center justify-center">
         <div v-if="isLoading" class=" absolute h-screen w-full flex items-center justify-center z-50 opacity-60 bg-black">
-            <Loader />
+            <LoaderMain />
         </div>
 
         <AuthSignIn :handleSignIn="handleSignIn" />

@@ -61,7 +61,7 @@ const whoToFollowList = ref([
                         </div>
                     </div>
                     <div class="flex items-center h-full">
-                        <button class="px-4 py-2 font-bold text-sm text-white dark:text-black bg-black dark:bg-white rounded-full">Follow</button>
+                        <button class="px-4 py-2 font-bold text-xs text-white dark:text-white bg-pallette-500 dark:bg-pallette-500 rounded-full">Follow</button>
                     </div>
                 </div>
             </SidebarRightPreviewCardItem>

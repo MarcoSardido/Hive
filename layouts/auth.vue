@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-[#fdbf12] dark:bg-dim-900">
+    <div class=" bg-pallette-500">
         <main class="h-screen">
             <slot />
         </main>
