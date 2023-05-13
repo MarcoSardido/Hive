@@ -25,7 +25,8 @@ model User {
   refreshToken RefreshToken[]
 
   // Buzz
-  BuzzPost BuzzPost[]
+  buzzPost   BuzzPost[]
+  mediaFiles MediaFile[]
 }
 
 model RefreshToken {
@@ -53,11 +54,29 @@ model BuzzPost {
   authorId String @db.ObjectId
 
   // Reply to another buzz post
-  replyToId String?    @db.ObjectId
-  replyTo   BuzzPost?  @relation("replies", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replyToId String?   @db.ObjectId
+  replyTo   BuzzPost? @relation("replies", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   // Same way other buzz post can reply to this buzz post
-  replies   BuzzPost[] @relation("replies")
+  replies   BuzzPost[]  @relation("replies")
 
-  // Todo: Media post
+  // Media files
+  mediaFiles MediaFile[]
+}
+
+model MediaFile {
+  id  String @id @default(auto()) @map("_id") @db.ObjectId
+  url String
+  providerPublicId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // User
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @db.ObjectId
+
+  // Buzz
+  buzz   BuzzPost? @relation(fields: [buzzId], references: [id])
+  buzzId String?   @db.ObjectId
 }
