@@ -12,10 +12,24 @@ interface UserType {
     userImage: string
 }
 
+interface BuzzDataType {
+    id: string
+    text: string
+}
+
+interface BuzzMediaType {
+    url: string,
+    providerPublicId: string,
+    userId: string,
+    buzzId: string
+}
+
 
 
 
 
 export {
-    UserType
+    UserType,
+    BuzzDataType,
+    BuzzMediaType
 }
